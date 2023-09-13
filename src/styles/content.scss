@@ -1,0 +1,58 @@
+@font-face {
+  font-family: "Poppins";
+  font-style: normal;
+  src: local("Poppins-Bold"), url(@/assets/Poppins-Bold.ttf) format("truetype");
+}
+
+.weather__content-wrapper {
+  font-family: "Poppins", Arial, Helvetica, sans-serif;
+  flex-grow: 1;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  padding-left: 5%;
+}
+
+.weather__content {
+}
+
+.content__city-info {
+  font-family: "Poppins", Arial, Helvetica, sans-serif;
+  padding-bottom: 16px;
+}
+
+.city-info__status {
+  font-weight: lighter;
+  display: block;
+}
+
+.city-info__name {
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.content__temp-info {
+  display: flex;
+  gap: 32px;
+}
+
+.temp-info__wrapper-left {
+  display: flex;
+}
+
+.temp-info__temp-value {
+  font-weight: bold;
+  font-size: 120px;
+}
+
+.units__C,
+.units__F,
+.units__division {
+  font-weight: bold;
+}
+
+.temp-info__wrapper-right {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}

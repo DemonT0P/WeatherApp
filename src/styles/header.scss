@@ -1,0 +1,41 @@
+@font-face {
+  font-family: "Poppins";
+  font-style: normal;
+  src: local("Poppins-Bold"), url(@/assets/Poppins-Bold.ttf) format("truetype");
+}
+
+.weather__header {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px;
+}
+
+.header__title {
+  font-family: "Poppins", Arial, Helvetica, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.header__form {
+  display: flex;
+}
+
+.form__input {
+  padding: 8px;
+  border: 0px;
+  border-bottom-left-radius: 8px;
+  border-top-left-radius: 8px;
+}
+
+.form__button {
+  font-family: "Poppins", Arial, Helvetica, sans-serif;
+  padding: 8px;
+  border: none;
+  background-color: black;
+  color: white;
+  border-bottom-right-radius: 8px;
+  border-top-right-radius: 8px;
+}
