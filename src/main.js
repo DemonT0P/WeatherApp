@@ -7,10 +7,10 @@ import "./styles/content.scss";
 document.querySelector("#app").innerHTML = `
 <div class="weather__header">
 <div class="header__title">Weather App</div>
-<div class="header__form">
+<form class="header__form">
   <input class="form__input">
   <button class="form__button">Search</button>
-</div>
+</form>
 </div>
 <div class="weather__content-wrapper">
 <div class="weather__content">
@@ -36,3 +36,54 @@ document.querySelector("#app").innerHTML = `
 </div>
 </div>
 `;
+
+function Temp(condition, city, region, temp, feelsLike, wind, humidity) {
+  return { condition, city, region, temp, feelsLike, wind, humidity };
+}
+
+async function getInfo(url) {
+  try {
+    let response = await fetch(
+      `https://api.weatherapi.com/v1/current.json?key=1feaf2a99a2145f391a203036231309&q=${url}`
+    );
+
+    if (response.status != 200) {
+      let responseJSON = await response.json();
+      throw new Error(responseJSON.error.message);
+    } else {
+      let responseJSON = await response.json();
+      let condition = responseJSON.current.condition.text;
+      let feelsLike = [
+        responseJSON.current.feelslike_c,
+        responseJSON.current.feelslike_f,
+      ];
+      let wind = [responseJSON.current.wind_kph, responseJSON.current.wind_mph];
+      let humidity = responseJSON.current.humidity;
+      let city = responseJSON.location.name;
+      let temp = [responseJSON.current.temp_c, responseJSON.current.temp_f];
+      let region = responseJSON.location.region;
+
+      await addToDom(
+        Temp(condition, city, region, temp, feelsLike, wind, humidity)
+      );
+    }
+  } catch (err) {
+    alert(err);
+  }
+}
+
+async function addToDom(info) {
+  document.querySelector(".city-info__status").innerText = info.condition;
+  document.querySelector(".city-info__name").innerText =
+    info.city + ", " + info.region;
+  document.querySelector(".temp-info__temp-value").innerText = info.temp[0];
+  document.querySelector(".feels-like__value").innerText = info.feelsLike[0];
+  document.querySelector(".wind__value").innerText = info.wind[0];
+  document.querySelector(".humidity__value").innerText = info.humidity;
+}
+
+let form = document.querySelector(".header__form");
+form.addEventListener("submit", async (e) => {
+  e.preventDefault();
+  await getInfo(document.querySelector(".form__input").value);
+});
