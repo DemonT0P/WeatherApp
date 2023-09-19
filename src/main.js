@@ -1,6 +1,7 @@
 import "./styles/style.scss";
 import "./styles/header.scss";
 import "./styles/content.scss";
+import { getTemp, getUserLocation } from "./scripts/API";
 
 //https://icons8.com/icon/3096/menu
 
@@ -37,53 +38,10 @@ document.querySelector("#app").innerHTML = `
 </div>
 `;
 
-function Temp(condition, city, region, temp, feelsLike, wind, humidity) {
-  return { condition, city, region, temp, feelsLike, wind, humidity };
-}
-
-async function getInfo(url) {
-  try {
-    let response = await fetch(
-      `https://api.weatherapi.com/v1/current.json?key=1feaf2a99a2145f391a203036231309&q=${url}`
-    );
-
-    if (response.status != 200) {
-      let responseJSON = await response.json();
-      throw new Error(responseJSON.error.message);
-    } else {
-      let responseJSON = await response.json();
-      let condition = responseJSON.current.condition.text;
-      let feelsLike = [
-        responseJSON.current.feelslike_c,
-        responseJSON.current.feelslike_f,
-      ];
-      let wind = [responseJSON.current.wind_kph, responseJSON.current.wind_mph];
-      let humidity = responseJSON.current.humidity;
-      let city = responseJSON.location.name;
-      let temp = [responseJSON.current.temp_c, responseJSON.current.temp_f];
-      let region = responseJSON.location.region;
-
-      await addToDom(
-        Temp(condition, city, region, temp, feelsLike, wind, humidity)
-      );
-    }
-  } catch (err) {
-    alert(err);
-  }
-}
-
-async function addToDom(info) {
-  document.querySelector(".city-info__status").innerText = info.condition;
-  document.querySelector(".city-info__name").innerText =
-    info.city + ", " + info.region;
-  document.querySelector(".temp-info__temp-value").innerText = info.temp[0];
-  document.querySelector(".feels-like__value").innerText = info.feelsLike[0];
-  document.querySelector(".wind__value").innerText = info.wind[0];
-  document.querySelector(".humidity__value").innerText = info.humidity;
-}
+getUserLocation();
 
 let form = document.querySelector(".header__form");
 form.addEventListener("submit", async (e) => {
   e.preventDefault();
-  await getInfo(document.querySelector(".form__input").value);
+  await getTemp(document.querySelector(".form__input").value);
 });
