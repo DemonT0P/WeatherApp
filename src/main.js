@@ -2,6 +2,7 @@ import "./styles/style.scss";
 import "./styles/header.scss";
 import "./styles/content.scss";
 import { getTemp, getUserLocation } from "./scripts/API";
+import { startEventListeners } from "./scripts/Dom";
 
 //https://icons8.com/icon/3096/menu
 
@@ -21,7 +22,7 @@ document.querySelector("#app").innerHTML = `
   </div>
   <div class="content__temp-info">
     <div class="temp-info__wrapper-left">
-      <div class="temp-info__temp-value">17</div>
+      <div class="temp-info__temp-value">17<span class="temp-value__unit">C</span></div>
       <div class="temp-info__units">
         <span class="units__C">C</span>
         <span class="units__division">|</span>
@@ -39,9 +40,4 @@ document.querySelector("#app").innerHTML = `
 `;
 
 getUserLocation();
-
-let form = document.querySelector(".header__form");
-form.addEventListener("submit", async (e) => {
-  e.preventDefault();
-  await getTemp(document.querySelector(".form__input").value);
-});
+startEventListeners();

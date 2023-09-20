@@ -12,5 +12,22 @@ export function checkCondition(condition) {
   if (condition.includes("fog")) return "fog";
   if (condition.includes("blizzard")) return "blizzard";
   if (condition.includes("ice")) return "ice";
+  if (condition.includes("overcast")) return "overcast";
   return "weather forecast";
+}
+
+export function toCelsius(temp) {
+  return Math.floor(((temp - 32) * (5 / 9)).toFixed(1) * 100) / 100;
+}
+
+export function toFahrenheit(temp) {
+  return Math.floor((temp * (9 / 5) + 32).toFixed(1) * 100) / 100;
+}
+
+export function toMPH(velocity) {
+  return Math.floor((velocity / 1.609).toFixed(1) * 100) / 100;
+}
+
+export function toKPH(velocity) {
+  return Math.floor((velocity * 1.609).toFixed(1) * 100) / 100;
 }

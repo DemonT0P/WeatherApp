@@ -41,14 +41,23 @@
   font-size: 120px;
 }
 
+.temp-info__units {
+  cursor: pointer;
+}
+
 .units__C,
 .units__F,
 .units__division {
   font-weight: bold;
+  cursor: pointer;
 }
 
 .temp-info__wrapper-right {
   display: flex;
   flex-direction: column;
   justify-content: center;
+}
+
+.temp-value__unit {
+  display: none;
 }

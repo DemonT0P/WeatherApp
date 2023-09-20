@@ -1,6 +1,6 @@
 import { addToDom } from "./Dom";
-import { Temp } from "./temp";
-import { checkCondition } from "./utils";
+import { Temp } from "./Temp";
+import { checkCondition } from "./Utils";
 
 export async function getTemp(url) {
   try {
