@@ -1,5 +1,6 @@
 import { addToDom } from "./Dom";
 import { Temp } from "./temp";
+import { checkCondition } from "./utils";
 
 export async function getTemp(url) {
   try {
@@ -33,11 +34,10 @@ export async function getTemp(url) {
 }
 
 export async function getBackgroundPic(condition) {
-  if (condition == "clear") {
-    condition = "Clear Sky";
-  }
   let response = await fetch(
-    `https://api.giphy.com/v1/gifs/translate?api_key=0IId1xgI4YAoLog8jJujHit6SyUe9No9&s=${condition}`,
+    `https://api.giphy.com/v1/gifs/translate?api_key=0IId1xgI4YAoLog8jJujHit6SyUe9No9&s=${checkCondition(
+      condition
+    )}`,
     {
       mode: "cors",
     }
